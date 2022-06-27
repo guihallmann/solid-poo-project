@@ -1,7 +1,7 @@
 import Race from './Race';
 
 class Orc extends Race {
-  public hp = 80;
+  public hp = 74;
   static instances = 0;
 
   constructor(name: string, dexterity: number) {
