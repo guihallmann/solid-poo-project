@@ -21,7 +21,7 @@ class Character implements Fighter {
     this._race = new Elf(this._name, this._dexterity);
     this._archetype = new Mage(this._name);
     this._maxLifePoints = this._race.maxLifePoints / 2;
-    this._lifePoints = this._race.maxLifePoints;
+    this._lifePoints = this._maxLifePoints;
     this._defense = getRandomInt(1, 10);
     this._strength = getRandomInt(1, 10);
     this._energy = {
@@ -42,10 +42,15 @@ class Character implements Fighter {
 
   get dexterity(): number { return this._dexterity; }
 
-  get energy(): Energy { return this._energy; }
+  get energy(): Energy { 
+    return {
+      type_: this._energy.type_,
+      amount: this._energy.amount,
+    };
+  }
 
   receiveDamage(attackPoints: number): number {
-    const damage = this._defense - attackPoints;
+    const damage = attackPoints - this._defense;
     if (damage > 0) this._lifePoints -= damage; 
     if (this._lifePoints <= 0) this._lifePoints = -1; 
     return this._lifePoints;
